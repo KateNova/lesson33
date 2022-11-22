@@ -7,7 +7,7 @@ services:
       - "80:80"
     depends_on:
       api:
-        condition: service_healthy
+        condition: service_started
   api:
     image: novakate/skypro_project:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     ports:
@@ -19,11 +19,6 @@ services:
         condition: service_healthy
       migrations:
         condition: service_completed_successfully
-    healthcheck:
-      test: [ "CMD-SHELL", "curl --fail http://localhost:8000 || exit 1" ]
-      interval: 10s
-      timeout: 10s
-      retries: 3
   migrations:
     image: novakate/skypro_project:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     depends_on:
