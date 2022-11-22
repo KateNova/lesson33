@@ -31,7 +31,7 @@ services:
         condition: service_healthy
     volumes:
       - ./.env.docker:/code/todolist/.env
-    command: bash -c "cd code && python3 manage.py migrate"
+    command: python3 manage.py migrate
   postgres:
     image: postgres:latest
     environment:
