@@ -27,7 +27,7 @@ services:
   migrations:
     image: novakate/skypro_project:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     depends_on:
-      pg:
+      postgres:
         condition: service_healthy
     volumes:
       - ./.env.docker:/code/todolist/.env
