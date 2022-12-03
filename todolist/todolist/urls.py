@@ -14,7 +14,7 @@ urlpatterns = [
         )
     ),
     path(
-        'api/core/',
+        'core/',
         include(
             ('core.urls', 'core'),
             namespace='core'
