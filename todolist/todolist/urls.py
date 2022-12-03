@@ -15,7 +15,10 @@ urlpatterns = [
     ),
     path(
         'api/core/',
-        include('core.urls')
+        include(
+            ('core.urls', 'core'),
+            namespace='core'
+        )
     ),
     path(
         'admin/',
