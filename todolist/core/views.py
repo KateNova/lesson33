@@ -44,6 +44,9 @@ class SignUpView(CreateAPIView):
 
 class SingInView(GenericAPIView):
     serializer_class = LoginSerializer
+    permission_classes = (
+        permissions.AllowAny,
+    )
 
     def get_queryset(self):
         return User.objects.all()
