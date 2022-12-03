@@ -6,4 +6,4 @@ RUN pip install -r requirements.txt
 RUN pip install gunicorn
 COPY todolist todolist
 WORKDIR /code/todolist
-CMD gunicorn todolist.wsgi --workers 3 --bind=localhost:8000
+CMD gunicorn todolist.wsgi --workers 3 --bind=0.0.0.0:8000
