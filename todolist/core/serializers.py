@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id'
+            'id',
             'username',
             'first_name',
             'last_name',
@@ -40,6 +40,21 @@ class SignUpSerializer(UserSerializer):
             validate_password,
         )
     )
+
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password',
+            'password_repeat'
+        )
+        read_only_fields = (
+            'id',
+        )
 
     def create(self, validated_data):
         user = User.objects.create_user(
