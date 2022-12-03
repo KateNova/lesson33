@@ -45,6 +45,9 @@ class SignUpView(CreateAPIView):
 class SingInView(GenericAPIView):
     serializer_class = LoginSerializer
 
+    def get_queryset(self):
+        return User.objects.all()
+
     def post(self, request):
         serializer = self.get_serializer(
             data=request.data
