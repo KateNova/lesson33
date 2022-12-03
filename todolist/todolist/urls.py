@@ -14,7 +14,7 @@ urlpatterns = [
         )
     ),
     path(
-        '/api/core/',
+        'api/core/',
         include('core.urls')
     ),
     path(
