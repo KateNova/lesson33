@@ -21,8 +21,14 @@ urlpatterns = [
         )
     ),
     path(
+        'goals/',
+        include(
+            ('goals.urls', 'goals'),
+            namespace='goals'
+        )
+    ),
+    path(
         'admin/',
         admin.site.urls
     ),
 ]
-
