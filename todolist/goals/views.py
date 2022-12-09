@@ -13,13 +13,14 @@ from rest_framework.pagination import LimitOffsetPagination
 from .filters import GoalDateFilter
 from .models import (
     GoalCategory,
-    Goal
+    Goal, GoalComment
 )
+from .permissions import CommentPermission
 from .serializers import (
     GoalCategoryCreateSerializer,
     GoalCategorySerializer,
     GoalSerializer,
-    GoalCreateSerializer,
+    GoalCreateSerializer, GoalCommentSerializer, GoalCommentCreateSerializer,
 )
 
 
@@ -110,6 +111,7 @@ class GoalListView(ListAPIView):
     )
     search_fields = (
         'title',
+        'description',
     )
 
     def get_queryset(self):
@@ -136,3 +138,47 @@ class GoalView(RetrieveUpdateDestroyAPIView):
         instance.is_deleted = True
         instance.save()
         return instance
+
+
+class CommentCreateView(CreateAPIView):
+    model = GoalComment
+    serializer_class = GoalCommentCreateSerializer
+    permission_classes = (
+        permissions.IsAuthenticated,
+    )
+
+
+class CommentView(RetrieveUpdateDestroyAPIView):
+    model = GoalComment
+    serializer_class = GoalCommentSerializer
+    permission_classes = (
+        permissions.IsAuthenticated,
+        CommentPermission
+    )
+
+    def get_queryset(self):
+        return GoalComment.objects.filter(
+            goal__user=self.request.user
+        )
+
+
+class CommentListView(ListAPIView):
+    model = GoalComment
+    serializer_class = GoalCommentSerializer
+    permission_classes = (
+        permissions.IsAuthenticated,
+    )
+    pagination_class = LimitOffsetPagination
+    filter_backends = (
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+    )
+    filterset_fields = (
+        'goal',
+    )
+    ordering = '-created'
+
+    def get_queryset(self):
+        return GoalComment.objects.filter(
+            goal__user=self.request.user
+        )

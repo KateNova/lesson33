@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import (
     GoalCategory,
     Goal,
+    GoalComment,
 )
 
 
@@ -31,4 +32,14 @@ class GoalAdmin(admin.ModelAdmin):
     search_fields = (
         'title',
         'user'
+    )
+
+
+@admin.register(GoalComment)
+class GoalCommentAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'goal',
+        'created',
+        'updated'
     )
