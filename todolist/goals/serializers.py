@@ -74,7 +74,7 @@ class GoalCommentCreateSerializer(serializers.ModelSerializer):
 
     def validate_goal(self, value):
         if not Goal.objects.filter(
-            goal=value,
+            id=value.id,
             user=self.context["request"].user,
         ).exists():
             raise serializers.ValidationError(
