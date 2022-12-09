@@ -87,7 +87,7 @@ class ProfileView(RetrieveUpdateDestroyAPIView):
 
     def delete(self, request, *args, **kwargs):
         logout(request)
-        return Response('')
+        return Response('', 204)
 
 
 class PasswordUpdateView(UpdateAPIView):

@@ -140,7 +140,7 @@ class GoalView(RetrieveUpdateDestroyAPIView):
         return instance
 
 
-class CommentCreateView(CreateAPIView):
+class GoalCommentCreateView(CreateAPIView):
     model = GoalComment
     serializer_class = GoalCommentCreateSerializer
     permission_classes = (
@@ -148,7 +148,7 @@ class CommentCreateView(CreateAPIView):
     )
 
 
-class CommentView(RetrieveUpdateDestroyAPIView):
+class GoalCommentView(RetrieveUpdateDestroyAPIView):
     model = GoalComment
     serializer_class = GoalCommentSerializer
     permission_classes = (
@@ -162,7 +162,7 @@ class CommentView(RetrieveUpdateDestroyAPIView):
         )
 
 
-class CommentListView(ListAPIView):
+class GoalCommentListView(ListAPIView):
     model = GoalComment
     serializer_class = GoalCommentSerializer
     permission_classes = (
