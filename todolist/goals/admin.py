@@ -4,7 +4,13 @@ from .models import (
     GoalCategory,
     Goal,
     GoalComment,
+    Board,
+    BoardParticipant
 )
+
+
+admin.site.register(Board)
+admin.site.register(BoardParticipant)
 
 
 @admin.register(GoalCategory)

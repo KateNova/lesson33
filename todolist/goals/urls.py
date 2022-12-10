@@ -10,6 +10,9 @@ from .views import (
     GoalCommentCreateView,
     GoalCommentListView,
     GoalCommentView,
+    BoardCreateView,
+    BoardListView,
+    BoardView,
 )
 
 
@@ -49,5 +52,17 @@ urlpatterns = [
     path(
         'goal_comment/<pk>',
         GoalCommentView.as_view()
+    ),
+    path(
+        'board/create',
+        BoardCreateView.as_view()
+    ),
+    path(
+        'board/list',
+        BoardListView.as_view()
+    ),
+    path(
+        'board/<pk>',
+        BoardView.as_view()
     ),
 ]
