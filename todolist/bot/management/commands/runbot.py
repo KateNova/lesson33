@@ -141,11 +141,7 @@ class Command(BaseCommand):
 
     def handle_message(self, msg: Message):
         tg_user, created = TgUser.objects.get_or_create(
-            tg_id=msg.from_.id,
-            defaults={
-                'chat_id': msg.chat.id,
-                'user_ud': msg.from_.username,
-            },
+            chat_id=msg.from_.id,
         )
         if created:
             self.tg_client.send_message(

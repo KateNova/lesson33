@@ -8,6 +8,9 @@ class TgUserSerializer(serializers.ModelSerializer):
     verification_code = serializers.CharField(
         write_only=True
     )
+    tg_id = serializers.CharField(
+        source='chat_id'
+    )
 
     class Meta:
         model = TgUser
