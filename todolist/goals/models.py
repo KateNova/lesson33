@@ -104,7 +104,13 @@ class Goal(DatesModelMixin):
         verbose_name='Удалена',
         default=False
     )
-    
+
+    def get_absolute_url(self):
+        return (
+            f'/boards/{self.category.board.pk}/'
+            f'goals?goal={self.pk}'
+        )
+
     class Meta:
         verbose_name = 'Цель'
         verbose_name_plural = 'Цели'
