@@ -161,6 +161,6 @@ class Command(BaseCommand):
                     offset = item.update_id + 1
                     self.handle_message(item.message)
             except ConnectTimeout:
-                pass
+                print(f'Connection Error: current offset {offset}')
             except:
                 raise
