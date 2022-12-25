@@ -28,6 +28,13 @@ urlpatterns = [
         )
     ),
     path(
+        'bot/',
+        include(
+            ('bot.urls', 'bot'),
+            namespace='bot'
+        ),
+    ),
+    path(
         'admin/',
         admin.site.urls
     ),
