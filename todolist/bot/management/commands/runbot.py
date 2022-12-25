@@ -11,6 +11,7 @@ from goals.models import (
     GoalCategory,
     BoardParticipant
 )
+from requests import ConnectTimeout
 
 
 class Command(BaseCommand):
@@ -156,7 +157,12 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         offset = 0
         while True:
-            res = self.tg_client.get_updates(offset=offset)
-            for item in res.result:
-                offset = item.update_id + 1
-                self.handle_message(item.message)
+            try:
+                res = self.tg_client.get_updates(offset=offset)
+                for item in res.result:
+                    offset = item.update_id + 1
+                    self.handle_message(item.message)
+            except ConnectTimeout:
+                pass
+            except:
+                raise
