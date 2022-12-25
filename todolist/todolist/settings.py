@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
 
     'core',
     'goals',
@@ -162,4 +161,4 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/logged-in/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
 
 TG_TOKEN = os.getenv('TG_TOKEN')
-SITE_ID = 1
+CURRENT_HOST = os.getenv('CURRENT_HOST')

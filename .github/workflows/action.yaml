@@ -25,6 +25,7 @@ jobs:
       SOCIAL_AUTH_VK_OAUTH2_KEY: ${{ secrets.SOCIAL_AUTH_VK_OAUTH2_KEY }}
       SOCIAL_AUTH_VK_OAUTH2_SECRET: ${{ secrets.SOCIAL_AUTH_VK_OAUTH2_SECRET }}
       TG_TOKEN: ${{ secrets.TG_TOKEN }}
+      CURRENT_HOST: ${{ secrets.CURRENT_HOST }}
     steps:
       - name: clone code
         uses: actions/checkout@v2

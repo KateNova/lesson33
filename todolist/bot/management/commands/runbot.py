@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.core.management import BaseCommand
-from django.contrib.sites.models import Site
 
 from bot.models import TgUser
 from bot.tg.client import TgClient
@@ -57,8 +56,7 @@ class Command(BaseCommand):
             category=tg_user.current_category
         )
         if goal.id:
-            current_site = Site.objects.get_current()
-            message_link = current_site.domain + goal.get_absolute_url()
+            message_link = settings.CURRENT_HOST + goal.get_absolute_url()
             self.tg_client.send_message(
                 msg.chat.id,
                 f'Цель добавлена успешно! Ссылка на цель:'
