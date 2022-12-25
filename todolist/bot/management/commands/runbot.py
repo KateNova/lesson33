@@ -18,7 +18,9 @@ class Command(BaseCommand):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.tg_client = TgClient(settings.BOT_TOKEN)
+        self.tg_client = TgClient(
+            settings.TG_TOKEN
+        )
 
     def handle_user_without_verification(self, msg: Message, tg_user: TgUser):
         tg_user.set_verification_code()
