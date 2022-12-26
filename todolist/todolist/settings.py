@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'social_django',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -146,7 +147,8 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 AUTHENTICATION_BACKENDS = (
@@ -162,3 +164,11 @@ SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
 
 TG_TOKEN = os.getenv('TG_TOKEN')
 CURRENT_HOST = os.getenv('CURRENT_HOST')
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'TODOList API',
+    'DESCRIPTION': 'Achive your goals',
+    'VERSION': '1.0.0',
+    'SERVE_URLCONF': 'todolist.urls'
+}

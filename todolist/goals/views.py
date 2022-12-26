@@ -236,7 +236,7 @@ class BoardView(RetrieveUpdateDestroyAPIView):
             Goal.objects.filter(
                 category__board=instance
             ).update(
-                status=Goal.Status.archived
+                status=Status.archived
             )
         return instance
 

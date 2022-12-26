@@ -4,6 +4,7 @@ from django.core.management import BaseCommand
 from bot.models import TgUser
 from bot.tg.client import TgClient
 from bot.tg.dc import Message
+from django.db.models import QuerySet
 from django.utils import timezone
 from goals.models import (
     Goal,
@@ -14,7 +15,7 @@ from requests import ConnectTimeout
 
 
 class Command(BaseCommand):
-    help = 'Запускает бота'
+    help: str = 'Запускает бота'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -31,7 +32,7 @@ class Command(BaseCommand):
         )
 
     def get_goals(self, msg: Message, tg_user: TgUser):
-        qs = Goal.objects.filter(user=tg_user.user)
+        qs: QuerySet = Goal.objects.filter(user=tg_user.user)
         if qs.count() > 0:
             resp_msg = [
                 f'№{item.id} - {item.title}'
@@ -49,7 +50,7 @@ class Command(BaseCommand):
             )
 
     def create_goal(self, msg: Message, tg_user: TgUser):
-        goal = Goal.objects.create(
+        goal: Goal = Goal.objects.create(
             title=msg.text,
             due_date=timezone.now(),
             user=tg_user.user,
@@ -80,7 +81,7 @@ class Command(BaseCommand):
         )
 
     def set_category(self, msg: Message, tg_user: TgUser):
-        cat = GoalCategory.objects.filter(
+        cat: QuerySet = GoalCategory.objects.filter(
             title=msg.text,
             board__participants__role__in=(
                 BoardParticipant.Role.owner,
@@ -115,7 +116,7 @@ class Command(BaseCommand):
             tg_user.stage = 1
             tg_user.save()
         elif tg_user.stage == 1:
-            cat_result = self.set_category(msg, tg_user)
+            cat_result: bool = self.set_category(msg, tg_user)
             if cat_result:
                 self.tg_client.send_message(
                     msg.chat.id,
@@ -152,8 +153,8 @@ class Command(BaseCommand):
         else:
             self.handle_user_without_verification(msg, tg_user)
 
-    def handle(self, *args, **kwargs):
-        offset = 0
+    def handle(self, *args, **kwargs) -> None:
+        offset: int = 0
         while True:
             try:
                 res = self.tg_client.get_updates(offset=offset)
